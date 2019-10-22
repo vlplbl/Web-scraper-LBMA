@@ -1,11 +1,9 @@
-from bs4 import BeautifulSoup
-import requests
-import pandas as pd
 import datetime
 from time import sleep
 import os
-import openpyxl
-import xlsxwriter
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
 
 
 class Scraper:
@@ -66,6 +64,8 @@ class Scraper:
         copper_frame.Date = copper_frame.Date.str.split('.')
         copper_frame.Date = copper_frame.Date.str.join("")
         copper_frame.Date = copper_frame.Date.str.replace(" ", "-")
+        copper_frame.Date = copper_frame.Date.str.replace(
+            "Febuary", 'February')
         copper_frame.Date = pd.to_datetime(copper_frame.Date, errors='coerce')
         copper_frame.Date = copper_frame.Date.dt.date
 
